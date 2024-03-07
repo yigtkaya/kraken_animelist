@@ -26,7 +26,7 @@ class NoInternetConnectionView extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.warning_amber,
-                      color: Colors.amber,
+                      color: Colors.red,
                       size: 50,
                     ),
                     Center(

@@ -89,6 +89,15 @@ class App extends StatelessWidget {
             ),
           );
         },
+        home: Column(
+          children: [
+            const Text('Hello World'),
+            TextButton(
+              onPressed: () => throw Exception(),
+              child: const Text("Throw Test Exception"),
+            ),
+          ],
+        ),
       ),
     );
   }

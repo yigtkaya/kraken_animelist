@@ -14,6 +14,8 @@ Future<void> setupDI() async {
 
   setupDevDI();
 
+  di.registerSingleton<HiveHelper>(HiveHelper());
+
   di.registerSingleton<AnalyticsHelper>(AnalyticsHelper());
 
   // override http request
@@ -22,14 +24,16 @@ Future<void> setupDI() async {
 
 Future<void> setupDevDI() async {
   //init local storage
-  await hiveStorage.initialize(boxName: BoxName.developmentBox);
   await firebaseConfig();
+  await hiveStorage.initialize(boxName: BoxName.developmentBox);
 }
 
 Future<void> firebaseConfig() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FirebaseCrashlytics.instance.recordFlutterError;
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
   await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
   await FirebaseAnalytics.instance.logAppOpen();
