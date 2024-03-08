@@ -15,12 +15,12 @@ class AppStateLoading extends AppState {
 }
 
 class AppStateLoaded extends AppState {
-  final KrakenAnimeResponse animeList;
+  final KrakenAnimeResponse krakenResponse;
 
-  const AppStateLoaded(this.animeList);
+  const AppStateLoaded(this.krakenResponse);
 
   @override
-  List<Object> get props => [animeList];
+  List<Object> get props => [krakenResponse];
 }
 
 class AppStateError extends AppState {
