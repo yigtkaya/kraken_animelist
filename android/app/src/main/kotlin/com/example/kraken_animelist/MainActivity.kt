@@ -22,7 +22,6 @@ class MainActivity: FlutterActivity() {
 
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "fetchAnimeList") {
-                // fetch animelist from the internet asynchronously
                 fetchAnimeList(result)
             } else {
                 result.notImplemented()
@@ -31,9 +30,8 @@ class MainActivity: FlutterActivity() {
     }
 
     private fun fetchAnimeList(result: MethodChannel.Result) {
-        // Launch a coroutine in the IO context
         // This will execute in a background thread
-        // You can also use the default Dispatcher if needed: kotlinx.coroutines.Dispatchers.Default
+        // You can also use the default Dispatcher
         kotlinx.coroutines.GlobalScope.launch(Dispatchers.IO) {
             try {
                 val url = URL("https://api.jikan.moe/v4/top/anime")
