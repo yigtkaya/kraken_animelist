@@ -10,3 +10,7 @@ abstract class AppEvent extends Equatable {
 class AppStartEvent extends AppEvent {
   const AppStartEvent();
 }
+
+class PullToRefreshEvent extends AppEvent {
+  const PullToRefreshEvent();
+}

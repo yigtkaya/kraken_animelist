@@ -5,10 +5,11 @@ part 'kraken_anime_detail_response.freezed.dart';
 part 'kraken_anime_detail_response.g.dart';
 
 @freezed
-class KrakenAnimeDetailResponse with _$KrakenAnimeDetailResponse {
-  const factory KrakenAnimeDetailResponse({
+class KrakenAnimeCharactersResponse with _$KrakenAnimeCharactersResponse {
+  const factory KrakenAnimeCharactersResponse({
     @JsonKey(name: "data") List<AnimeDetail>? data,
-  }) = _KrakenAnimeDetailResponse;
+  }) = _KrakenAnimeCharactersResponse;
 
-  factory KrakenAnimeDetailResponse.fromJson(Map<String, dynamic> json) => _$KrakenAnimeDetailResponseFromJson(json);
+  factory KrakenAnimeCharactersResponse.fromJson(Map<String, dynamic> json) =>
+      _$KrakenAnimeCharactersResponseFromJson(json);
 }

@@ -6,4 +6,8 @@ class NativeMethods {
   static Future<dynamic> fetchAnimeList() async {
     return _channel.invokeMethod('fetchAnimeList', []);
   }
+
+  static Future<dynamic> fetchCharacterList(int id) async {
+    return _channel.invokeMethod('fetchAnimeList', [id]);
+  }
 }

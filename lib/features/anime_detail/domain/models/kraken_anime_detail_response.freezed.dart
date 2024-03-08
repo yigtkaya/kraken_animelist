@@ -14,33 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-KrakenAnimeDetailResponse _$KrakenAnimeDetailResponseFromJson(Map<String, dynamic> json) {
-  return _KrakenAnimeDetailResponse.fromJson(json);
+KrakenAnimeCharactersResponse _$KrakenAnimeCharactersResponseFromJson(Map<String, dynamic> json) {
+  return _KrakenAnimeCharactersResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$KrakenAnimeDetailResponse {
+mixin _$KrakenAnimeCharactersResponse {
   @JsonKey(name: "data")
   List<AnimeDetail>? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $KrakenAnimeDetailResponseCopyWith<KrakenAnimeDetailResponse> get copyWith => throw _privateConstructorUsedError;
+  $KrakenAnimeCharactersResponseCopyWith<KrakenAnimeCharactersResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $KrakenAnimeDetailResponseCopyWith<$Res> {
-  factory $KrakenAnimeDetailResponseCopyWith(
-          KrakenAnimeDetailResponse value, $Res Function(KrakenAnimeDetailResponse) then) =
-      _$KrakenAnimeDetailResponseCopyWithImpl<$Res, KrakenAnimeDetailResponse>;
+abstract class $KrakenAnimeCharactersResponseCopyWith<$Res> {
+  factory $KrakenAnimeCharactersResponseCopyWith(
+          KrakenAnimeCharactersResponse value, $Res Function(KrakenAnimeCharactersResponse) then) =
+      _$KrakenAnimeCharactersResponseCopyWithImpl<$Res, KrakenAnimeCharactersResponse>;
   @useResult
   $Res call({@JsonKey(name: "data") List<AnimeDetail>? data});
 }
 
 /// @nodoc
-class _$KrakenAnimeDetailResponseCopyWithImpl<$Res, $Val extends KrakenAnimeDetailResponse>
-    implements $KrakenAnimeDetailResponseCopyWith<$Res> {
-  _$KrakenAnimeDetailResponseCopyWithImpl(this._value, this._then);
+class _$KrakenAnimeCharactersResponseCopyWithImpl<$Res, $Val extends KrakenAnimeCharactersResponse>
+    implements $KrakenAnimeCharactersResponseCopyWith<$Res> {
+  _$KrakenAnimeCharactersResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -62,21 +63,22 @@ class _$KrakenAnimeDetailResponseCopyWithImpl<$Res, $Val extends KrakenAnimeDeta
 }
 
 /// @nodoc
-abstract class _$$KrakenAnimeDetailResponseImplCopyWith<$Res> implements $KrakenAnimeDetailResponseCopyWith<$Res> {
-  factory _$$KrakenAnimeDetailResponseImplCopyWith(
-          _$KrakenAnimeDetailResponseImpl value, $Res Function(_$KrakenAnimeDetailResponseImpl) then) =
-      __$$KrakenAnimeDetailResponseImplCopyWithImpl<$Res>;
+abstract class _$$KrakenAnimeCharactersResponseImplCopyWith<$Res>
+    implements $KrakenAnimeCharactersResponseCopyWith<$Res> {
+  factory _$$KrakenAnimeCharactersResponseImplCopyWith(
+          _$KrakenAnimeCharactersResponseImpl value, $Res Function(_$KrakenAnimeCharactersResponseImpl) then) =
+      __$$KrakenAnimeCharactersResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: "data") List<AnimeDetail>? data});
 }
 
 /// @nodoc
-class __$$KrakenAnimeDetailResponseImplCopyWithImpl<$Res>
-    extends _$KrakenAnimeDetailResponseCopyWithImpl<$Res, _$KrakenAnimeDetailResponseImpl>
-    implements _$$KrakenAnimeDetailResponseImplCopyWith<$Res> {
-  __$$KrakenAnimeDetailResponseImplCopyWithImpl(
-      _$KrakenAnimeDetailResponseImpl _value, $Res Function(_$KrakenAnimeDetailResponseImpl) _then)
+class __$$KrakenAnimeCharactersResponseImplCopyWithImpl<$Res>
+    extends _$KrakenAnimeCharactersResponseCopyWithImpl<$Res, _$KrakenAnimeCharactersResponseImpl>
+    implements _$$KrakenAnimeCharactersResponseImplCopyWith<$Res> {
+  __$$KrakenAnimeCharactersResponseImplCopyWithImpl(
+      _$KrakenAnimeCharactersResponseImpl _value, $Res Function(_$KrakenAnimeCharactersResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -84,7 +86,7 @@ class __$$KrakenAnimeDetailResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$KrakenAnimeDetailResponseImpl(
+    return _then(_$KrakenAnimeCharactersResponseImpl(
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -95,11 +97,11 @@ class __$$KrakenAnimeDetailResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$KrakenAnimeDetailResponseImpl implements _KrakenAnimeDetailResponse {
-  const _$KrakenAnimeDetailResponseImpl({@JsonKey(name: "data") final List<AnimeDetail>? data}) : _data = data;
+class _$KrakenAnimeCharactersResponseImpl implements _KrakenAnimeCharactersResponse {
+  const _$KrakenAnimeCharactersResponseImpl({@JsonKey(name: "data") final List<AnimeDetail>? data}) : _data = data;
 
-  factory _$KrakenAnimeDetailResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$KrakenAnimeDetailResponseImplFromJson(json);
+  factory _$KrakenAnimeCharactersResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$KrakenAnimeCharactersResponseImplFromJson(json);
 
   final List<AnimeDetail>? _data;
   @override
@@ -114,14 +116,14 @@ class _$KrakenAnimeDetailResponseImpl implements _KrakenAnimeDetailResponse {
 
   @override
   String toString() {
-    return 'KrakenAnimeDetailResponse(data: $data)';
+    return 'KrakenAnimeCharactersResponse(data: $data)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$KrakenAnimeDetailResponseImpl &&
+            other is _$KrakenAnimeCharactersResponseImpl &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
@@ -132,28 +134,29 @@ class _$KrakenAnimeDetailResponseImpl implements _KrakenAnimeDetailResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$KrakenAnimeDetailResponseImplCopyWith<_$KrakenAnimeDetailResponseImpl> get copyWith =>
-      __$$KrakenAnimeDetailResponseImplCopyWithImpl<_$KrakenAnimeDetailResponseImpl>(this, _$identity);
+  _$$KrakenAnimeCharactersResponseImplCopyWith<_$KrakenAnimeCharactersResponseImpl> get copyWith =>
+      __$$KrakenAnimeCharactersResponseImplCopyWithImpl<_$KrakenAnimeCharactersResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$KrakenAnimeDetailResponseImplToJson(
+    return _$$KrakenAnimeCharactersResponseImplToJson(
       this,
     );
   }
 }
 
-abstract class _KrakenAnimeDetailResponse implements KrakenAnimeDetailResponse {
-  const factory _KrakenAnimeDetailResponse({@JsonKey(name: "data") final List<AnimeDetail>? data}) =
-      _$KrakenAnimeDetailResponseImpl;
+abstract class _KrakenAnimeCharactersResponse implements KrakenAnimeCharactersResponse {
+  const factory _KrakenAnimeCharactersResponse({@JsonKey(name: "data") final List<AnimeDetail>? data}) =
+      _$KrakenAnimeCharactersResponseImpl;
 
-  factory _KrakenAnimeDetailResponse.fromJson(Map<String, dynamic> json) = _$KrakenAnimeDetailResponseImpl.fromJson;
+  factory _KrakenAnimeCharactersResponse.fromJson(Map<String, dynamic> json) =
+      _$KrakenAnimeCharactersResponseImpl.fromJson;
 
   @override
   @JsonKey(name: "data")
   List<AnimeDetail>? get data;
   @override
   @JsonKey(ignore: true)
-  _$$KrakenAnimeDetailResponseImplCopyWith<_$KrakenAnimeDetailResponseImpl> get copyWith =>
+  _$$KrakenAnimeCharactersResponseImplCopyWith<_$KrakenAnimeCharactersResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

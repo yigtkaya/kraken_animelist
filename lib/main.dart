@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/dependecy_injection/di.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/app_bloc.dart';
+import 'package:kraken_animelist/features/anime_list/presentation/anime_list_page.dart';
 import 'package:kraken_animelist/features/no_internet_connection/no_internet_connection_view.dart';
 import 'package:kraken_animelist/src/shared/constants/app_design_constant.dart';
-import 'package:kraken_animelist/src/shared/extensions/list_extension.dart';
 import 'package:kraken_animelist/src/shared/observers/custom_route_observer.dart';
 import 'package:kraken_animelist/src/shared/utils/app_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -98,58 +98,7 @@ class App extends StatelessWidget {
               ),
             );
           },
-          home: BlocBuilder<AppBloc, AppState>(
-            builder: (context, state) {
-              if (state is AppStateLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.amber,
-                  ),
-                );
-              }
-              if (state is AppStateLoaded) {
-                final animeList = state.krakenResponse.data;
-                if (animeList.isNotNullOrEmpty) {
-                  return Scaffold(
-                    appBar: AppBar(
-                      title: Text(
-                        'Kraken Anime List',
-                        style: TextStyle(color: Colors.white, fontSize: 18.sp),
-                      ),
-                    ),
-                    body: ListView.builder(
-                      itemCount: animeList!.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(
-                            animeList[index].title!,
-                            style: TextStyle(fontSize: 16.sp),
-                          ),
-                          subtitle: Text(
-                            animeList[index].rating!,
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: Text('No data found'),
-                  );
-                }
-              }
-
-              return const Center(
-                child: Text(
-                  'Something went wrong!',
-                  style: TextStyle(
-                    color: Colors.red,
-                  ),
-                ),
-              );
-            },
-          ),
+          home: const AnimeListingPage(),
         ),
       ),
     );

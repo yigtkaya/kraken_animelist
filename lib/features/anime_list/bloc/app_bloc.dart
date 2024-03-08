@@ -10,13 +10,31 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final krakenAnimeRepositoryImpl = KrakenAnimeRepositoryImpl();
   AppBloc() : super(const AppStateLoading()) {
     on<AppStartEvent>(onStart);
+    on<PullToRefreshEvent>(onPullToRefresh);
   }
 
   Future<void> onStart(
     AppStartEvent event,
     Emitter<AppState> emit,
   ) async {
-    final krakenResponse = await krakenAnimeRepositoryImpl.getAnimeList();
-    emit(AppStateLoaded(krakenResponse));
+    try {
+      final krakenResponse = await krakenAnimeRepositoryImpl.getAnimeList();
+      emit(AppStateLoaded(krakenResponse));
+    } catch (e) {
+      emit(const AppStateError("Something went wrong, please try again later."));
+    }
+  }
+
+  Future<void> onPullToRefresh(
+    PullToRefreshEvent event,
+    Emitter<AppState> emit,
+  ) async {
+    try {
+      emit(const AppStateLoading());
+      final krakenResponse = await krakenAnimeRepositoryImpl.getAnimeList();
+      emit(AppStateLoaded(krakenResponse));
+    } catch (e) {
+      emit(const AppStateError("Something went wrong, please try again later."));
+    }
   }
 }
