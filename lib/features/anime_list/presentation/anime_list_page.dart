@@ -43,6 +43,7 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
       ),
       body: RefreshIndicator(
         onRefresh: () async {

@@ -36,6 +36,7 @@ class AnimeDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffE5EBFE),
+        centerTitle: true,
         title: Text(
           krakenAnime.title!,
           style: TextStyle(
