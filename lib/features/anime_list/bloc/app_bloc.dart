@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:kraken_animelist/features/anime_list/domain/models/kraken_anime_response.dart';
 import 'package:kraken_animelist/features/anime_list/domain/repository/anime_list_repository_impl.dart';
 

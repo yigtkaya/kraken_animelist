@@ -16,7 +16,7 @@ class AnimeDetailPage extends StatelessWidget {
   static const routeName = "/anime_detail";
 
   static Route<bool> route(KrakenAnime krakenAnime) {
-    return RouteHelper.slide(
+    return RouteHelper.platform(
       settings: const RouteSettings(name: routeName),
       builder: (_) {
         return BlocProvider<CharactersBloc>(
@@ -49,36 +49,39 @@ class AnimeDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CachedNetworkImage(
-                imageUrl: krakenAnime.images?["jpg"]?.largeImageUrl ?? "",
-                imageBuilder: (_, provider) {
-                  return Container(
-                    height: context.screenHeight * 0.25.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.r),
-                      image: DecorationImage(
-                        image: provider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                },
-                placeholder: (context, url) => SizedBox(
-                  height: context.screenHeight * 0.24.h,
-                  width: double.infinity,
-                  child: Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(
+              Hero(
+                tag: krakenAnime.malId.toString(),
+                child: CachedNetworkImage(
+                  imageUrl: krakenAnime.images?["jpg"]?.largeImageUrl ?? "",
+                  imageBuilder: (_, provider) {
+                    return Container(
+                      height: context.screenHeight * 0.25.h,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(12.r),
+                        image: DecorationImage(
+                          image: provider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                  placeholder: (context, url) => SizedBox(
+                    height: context.screenHeight * 0.24.h,
+                    width: double.infinity,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                        ),
                       ),
                     ),
                   ),
+                  errorWidget: (context, url, error) => const Text('error'),
                 ),
-                errorWidget: (context, url, error) => const Text('error'),
               ),
               12.rH,
               Row(
@@ -104,12 +107,12 @@ class AnimeDetailPage extends StatelessWidget {
                   ),
                 ],
               ),
-              6.rH,
+              12.rH,
               Divider(
                 color: Colors.grey.shade200,
                 thickness: 2,
               ),
-              6.rH,
+              12.rH,
               Text(
                 "Information",
                 style: TextStyle(
@@ -129,12 +132,12 @@ class AnimeDetailPage extends StatelessWidget {
                   fontSize: 16.sp,
                 ),
               ),
-              6.rH,
+              12.rH,
               Divider(
                 color: Colors.grey.shade200,
                 thickness: 2,
               ),
-              6.rH,
+              12.rH,
               Text(
                 "Synopsis",
                 style: TextStyle(
@@ -149,7 +152,12 @@ class AnimeDetailPage extends StatelessWidget {
                   fontSize: 16.sp,
                 ),
               ),
-              16.rH,
+              12.rH,
+              Divider(
+                color: Colors.grey.shade200,
+                thickness: 2,
+              ),
+              12.rH,
               Text(
                 "Characters",
                 style: TextStyle(
@@ -157,7 +165,7 @@ class AnimeDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              6.rH,
+              12.rH,
               BlocBuilder<CharactersBloc, CharactersState>(
                 builder: (context, state) {
                   if (state is CharactersStateLoading) {
@@ -167,17 +175,20 @@ class AnimeDetailPage extends StatelessWidget {
                   }
 
                   if (state is CharactersStateLoaded) {
-                    return ListView.builder(
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 2.w,
+                      ),
                       itemCount: state.characters.data!.length,
-                      scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: ((context, index) {
-                        return Row(
+                        return Column(
                           children: [
                             SizedBox(
-                              height: 100.r,
-                              width: 100.r,
+                              height: 120.r,
+                              width: 120.r,
                               child: CachedNetworkImage(
                                 imageUrl: state.characters.data![index].character!.images!.jpg!.imageUrl ?? "",
                                 imageBuilder: (_, provider) {
@@ -186,7 +197,7 @@ class AnimeDetailPage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(12.r),
                                       image: DecorationImage(
                                         image: provider,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   );
@@ -208,21 +219,77 @@ class AnimeDetailPage extends StatelessWidget {
                                 errorWidget: (context, url, error) => const Text('error'),
                               ),
                             ),
-                            12.rW,
-                            Flexible(
-                              child: Text(
-                                state.characters.data![index].character!.name ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            12.rH,
+                            Text(
+                              state.characters.data![index].character!.name ?? "",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         );
                       }),
                     );
+                    // return ListView.separated(
+                    //   itemCount: state.characters.data!.length,
+                    //   scrollDirection: Axis.vertical,
+                    //   shrinkWrap: true,
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   separatorBuilder: (context, index) => 12.rH,
+                    //   itemBuilder: ((context, index) {
+                    //     return Row(
+                    //       children: [
+                    //         SizedBox(
+                    //           height: 100.r,
+                    //           width: 100.r,
+                    //           child: CachedNetworkImage(
+                    //             imageUrl: state.characters.data![index].character!.images!.jpg!.imageUrl ?? "",
+                    //             imageBuilder: (_, provider) {
+                    //               return Container(
+                    //                 decoration: BoxDecoration(
+                    //                   borderRadius: BorderRadius.circular(12.r),
+                    //                   image: DecorationImage(
+                    //                     image: provider,
+                    //                     fit: BoxFit.fill,
+                    //                   ),
+                    //                 ),
+                    //               );
+                    //             },
+                    //             placeholder: (context, url) => SizedBox(
+                    //               height: 100.r,
+                    //               width: 100.r,
+                    //               child: Shimmer.fromColors(
+                    //                 baseColor: Colors.grey[300]!,
+                    //                 highlightColor: Colors.grey[100]!,
+                    //                 child: Container(
+                    //                   width: double.infinity,
+                    //                   decoration: BoxDecoration(
+                    //                     color: Colors.grey[300],
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             errorWidget: (context, url, error) => const Text('error'),
+                    //           ),
+                    //         ),
+                    //         12.rW,
+                    //         Flexible(
+                    //           child: Text(
+                    //             state.characters.data![index].character!.name ?? "",
+                    //             overflow: TextOverflow.ellipsis,
+                    //             style: TextStyle(
+                    //               fontSize: 16.sp,
+                    //               fontWeight: FontWeight.bold,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     );
+                    //   }),
+                    // );
                   }
 
                   return const Center(

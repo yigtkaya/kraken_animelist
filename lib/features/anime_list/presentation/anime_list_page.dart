@@ -15,7 +15,7 @@ class AnimeListingPage extends StatefulWidget {
 
 class _AnimeListingPageState extends State<AnimeListingPage> {
   final scrollController = ScrollController();
-
+  final pageSize = 25;
   @override
   void initState() {
     scrollController.addListener(onScroll);

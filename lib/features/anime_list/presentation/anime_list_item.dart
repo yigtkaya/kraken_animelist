@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/features/anime_detail/presentation/anime_detail_page.dart';
 import 'package:kraken_animelist/features/anime_list/domain/models/kraken_anime.dart';
@@ -24,68 +25,73 @@ class AnimeListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(12.r),
+            topRight: Radius.circular(12.r),
             bottomRight: Radius.circular(12.r),
           ),
           color: Colors.grey.shade300,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
               height: context.screenHeight * 0.16.h,
               width: context.screenWidth * 0.3.w,
-              child: CachedNetworkImage(
-                imageUrl: krakenAnime.images?["jpg"]?.largeImageUrl ?? "",
-                imageBuilder: (_, provider) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: provider,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  );
-                },
-                placeholder: (context, url) => SizedBox(
-                  height: context.screenHeight * 0.24.h,
-                  width: double.infinity,
-                  child: Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(
-                      width: double.infinity,
+              child: Hero(
+                tag: krakenAnime.malId.toString(),
+                child: CachedNetworkImage(
+                  imageUrl: krakenAnime.images?["jpg"]?.largeImageUrl ?? "",
+                  imageBuilder: (_, provider) {
+                    return Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        image: DecorationImage(
+                          image: provider,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    );
+                  },
+                  placeholder: (context, url) => SizedBox(
+                    height: context.screenHeight * 0.24.h,
+                    width: double.infinity,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                        ),
                       ),
                     ),
                   ),
+                  errorWidget: (context, url, error) => const Text('error'),
                 ),
-                errorWidget: (context, url, error) => const Text('error'),
               ),
             ),
             12.rW,
-            Flexible(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    krakenAnime.title ?? "",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(8.0.h),
+                child: Column(
+                  children: [
+                    Text(
+                      krakenAnime.title ?? "Title",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  12.rH,
-                  Text(
-                    "${krakenAnime.score.toString()} ⭐️",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
+                    12.rH,
+                    Text(
+                      "${krakenAnime.score.toString()} ⭐️",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
