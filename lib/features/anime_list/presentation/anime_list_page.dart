@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/app_bloc.dart';
-import 'package:kraken_animelist/features/anime_list/bloc/cubit/loading_cubit.dart';
 import 'package:kraken_animelist/features/anime_list/presentation/anime_list_item.dart';
 import 'package:kraken_animelist/src/shared/extensions/int_extension.dart';
 import 'package:kraken_animelist/src/shared/extensions/list_extension.dart';
@@ -25,7 +24,9 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
 
   void onScroll() {
     if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-      BlocProvider.of<AppBloc>(context).add(const LoadNextPageEvent());
+      BlocProvider.of<AppBloc>(context).add(
+        const LoadNextPageEvent(),
+      );
     }
   }
 
@@ -41,7 +42,9 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          BlocProvider.of<AppBloc>(context).add(const PullToRefreshEvent());
+          BlocProvider.of<AppBloc>(context).add(
+            const PullToRefreshEvent(),
+          );
         },
         child: Padding(
           padding: EdgeInsets.all(8.0.h),
@@ -53,18 +56,20 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
               if (state is AppStateLoaded) {
                 final animeList = state.krakenResponse.data;
                 if (animeList.isNotNullOrEmpty) {
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    controller: scrollController,
-                    itemCount: animeList!.length,
-                    separatorBuilder: (context, index) => 12.rH,
-                    itemBuilder: (context, index) {
-                      if (index < animeList.length) {
-                        return AnimeListItem(krakenAnime: animeList[index]);
-                      } else {
-                        return buildLoading();
-                      }
-                    },
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          controller: scrollController,
+                          itemCount: animeList!.length,
+                          separatorBuilder: (context, index) => 12.rH,
+                          itemBuilder: (context, index) {
+                            return AnimeListItem(krakenAnime: animeList[index]);
+                          },
+                        ),
+                      ),
+                    ],
                   );
                 } else {
                   return Center(
@@ -91,14 +96,6 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget buildLoading() {
-    return BlocBuilder<LoadingCubit, bool>(
-      builder: (context, isLoading) {
-        return isLoading ? const CircularProgressIndicator() : const SizedBox.shrink();
-      },
     );
   }
 }
