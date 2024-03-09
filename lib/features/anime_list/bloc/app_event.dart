@@ -14,3 +14,7 @@ class AppStartEvent extends AppEvent {
 class PullToRefreshEvent extends AppEvent {
   const PullToRefreshEvent();
 }
+
+class LoadNextPageEvent extends AppEvent {
+  const LoadNextPageEvent();
+}

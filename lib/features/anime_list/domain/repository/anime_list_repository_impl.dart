@@ -7,8 +7,8 @@ class KrakenAnimeRepositoryImpl extends KrakenAnimeRepository {
   KrakenAnimeRepositoryImpl();
 
   @override
-  Future<KrakenAnimeResponse> getAnimeList() async {
-    final response = await NativeMethods.fetchAnimeList();
+  Future<KrakenAnimeResponse> getAnimeList(int page) async {
+    final response = await NativeMethods.fetchAnimeList(page);
     final dto = rawdataFromJson(response);
 
     return KrakenAnimeResponse(

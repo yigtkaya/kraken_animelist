@@ -171,6 +171,7 @@ class AnimeDetailPage extends StatelessWidget {
                       itemCount: state.characters.data!.length,
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: ((context, index) {
                         return Row(
                           children: [

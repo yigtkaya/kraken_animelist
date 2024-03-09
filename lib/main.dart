@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/dependecy_injection/di.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/app_bloc.dart';
+import 'package:kraken_animelist/features/anime_list/bloc/cubit/loading_cubit.dart';
 import 'package:kraken_animelist/features/anime_list/presentation/anime_list_page.dart';
 import 'package:kraken_animelist/features/no_internet_connection/no_internet_connection_view.dart';
 import 'package:kraken_animelist/src/shared/constants/app_design_constant.dart';
@@ -98,7 +99,20 @@ class App extends StatelessWidget {
               ),
             );
           },
-          home: const AnimeListingPage(),
+          home: MultiBlocProvider(
+            providers: [
+              BlocProvider<AppBloc>(
+                create: (context) => AppBloc()
+                  ..add(
+                    const AppStartEvent(),
+                  ),
+              ),
+              BlocProvider<LoadingCubit>(
+                create: (context) => LoadingCubit(),
+              ),
+            ],
+            child: const AnimeListingPage(),
+          ),
         ),
       ),
     );

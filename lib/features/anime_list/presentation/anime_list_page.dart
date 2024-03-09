@@ -2,12 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/app_bloc.dart';
+import 'package:kraken_animelist/features/anime_list/bloc/cubit/loading_cubit.dart';
 import 'package:kraken_animelist/features/anime_list/presentation/anime_list_item.dart';
 import 'package:kraken_animelist/src/shared/extensions/int_extension.dart';
 import 'package:kraken_animelist/src/shared/extensions/list_extension.dart';
 
-class AnimeListingPage extends StatelessWidget {
+class AnimeListingPage extends StatefulWidget {
   const AnimeListingPage({super.key});
+
+  @override
+  State<AnimeListingPage> createState() => _AnimeListingPageState();
+}
+
+class _AnimeListingPageState extends State<AnimeListingPage> {
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    scrollController.addListener(onScroll);
+    super.initState();
+  }
+
+  void onScroll() {
+    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      BlocProvider.of<AppBloc>(context).add(const LoadNextPageEvent());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +54,16 @@ class AnimeListingPage extends StatelessWidget {
                 final animeList = state.krakenResponse.data;
                 if (animeList.isNotNullOrEmpty) {
                   return ListView.separated(
+                    shrinkWrap: true,
+                    controller: scrollController,
                     itemCount: animeList!.length,
                     separatorBuilder: (context, index) => 12.rH,
                     itemBuilder: (context, index) {
-                      return AnimeListItem(krakenAnime: animeList[index]);
+                      if (index < animeList.length) {
+                        return AnimeListItem(krakenAnime: animeList[index]);
+                      } else {
+                        return buildLoading();
+                      }
                     },
                   );
                 } else {
@@ -65,6 +91,14 @@ class AnimeListingPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildLoading() {
+    return BlocBuilder<LoadingCubit, bool>(
+      builder: (context, isLoading) {
+        return isLoading ? const CircularProgressIndicator() : const SizedBox.shrink();
+      },
     );
   }
 }
