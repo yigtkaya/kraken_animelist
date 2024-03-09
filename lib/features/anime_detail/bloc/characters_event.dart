@@ -1,4 +1,4 @@
-part of 'characters_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class CharactersEvent extends Equatable {
   const CharactersEvent();

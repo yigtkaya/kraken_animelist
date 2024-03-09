@@ -1,15 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:kraken_animelist/features/anime_list/domain/models/kraken_anime_response.dart';
+import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_event.dart';
+import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_state.dart';
 import 'package:kraken_animelist/features/anime_list/domain/repository/anime_list_repository_impl.dart';
 
-part 'app_event.dart';
-part 'app_state.dart';
-
-class AppBloc extends Bloc<AppEvent, AppState> {
-  final krakenAnimeRepositoryImpl = KrakenAnimeRepositoryImpl();
+class KrakenAnimeBloc extends Bloc<KrakenAnimeEvent, KrakenAnimeState> {
+  final KrakenAnimeRepositoryImpl krakenAnimeRepositoryImpl;
   int page = 1;
-  AppBloc() : super(const AppStateLoading()) {
+  KrakenAnimeBloc(
+    this.krakenAnimeRepositoryImpl,
+  ) : super(const KrakenAnimeStateLoading()) {
     on<AppStartEvent>(onStart);
     on<PullToRefreshEvent>(onPullToRefresh);
     on<LoadNextPageEvent>(onLoadNextPage);
@@ -17,34 +16,31 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   Future<void> onStart(
     AppStartEvent event,
-    Emitter<AppState> emit,
+    Emitter<KrakenAnimeState> emit,
   ) async {
     try {
       final krakenResponse = await krakenAnimeRepositoryImpl.getAnimeList(page);
       emit(
-        AppStateLoaded(krakenResponse),
+        KrakenAnimeStateLoaded(krakenResponse),
       );
     } catch (e) {
-      emit(const AppStateError("Something went wrong, please try again later."));
+      emit(const KrakenAnimeStateError("Something went wrong, please try again later."));
     }
   }
 
   Future<void> onPullToRefresh(
     PullToRefreshEvent event,
-    Emitter<AppState> emit,
+    Emitter<KrakenAnimeState> emit,
   ) async {
     try {
-      emit(
-        const AppStateLoading(),
-      );
       page = 1;
       final krakenResponse = await krakenAnimeRepositoryImpl.getAnimeList(page);
       emit(
-        AppStateLoaded(krakenResponse),
+        KrakenAnimeStateLoaded(krakenResponse),
       );
     } catch (e) {
       emit(
-        const AppStateError(
+        const KrakenAnimeStateError(
           "Something went wrong, please try again later.",
         ),
       );
@@ -53,20 +49,23 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   Future<void> onLoadNextPage(
     LoadNextPageEvent event,
-    Emitter<AppState> emit,
+    Emitter<KrakenAnimeState> emit,
   ) async {
-    final prevKrakenResponse = (state as AppStateLoaded).krakenResponse;
+    if (state is! KrakenAnimeStateLoaded) {
+      return;
+    }
+    final prevKrakenResponse = (state as KrakenAnimeStateLoaded).krakenResponse;
     if (!prevKrakenResponse.pagination!.hasNextPage!) {
       return;
     }
     try {
       page++;
       final krakenResponse = await krakenAnimeRepositoryImpl.getAnimeList(page);
-      final existingAnimeList = (state as AppStateLoaded).krakenResponse.data ?? [];
+      final existingAnimeList = (state as KrakenAnimeStateLoaded).krakenResponse.data ?? [];
       final newAnimeList = krakenResponse.data ?? [];
       final updatedAnimeList = [...existingAnimeList, ...newAnimeList];
       emit(
-        AppStateLoaded(
+        KrakenAnimeStateLoaded(
           krakenResponse.copyWith(
             data: updatedAnimeList,
           ),
@@ -74,7 +73,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       );
     } catch (e) {
       emit(
-        const AppStateError(
+        const KrakenAnimeStateError(
           "Something went wrong, please try again later.",
         ),
       );

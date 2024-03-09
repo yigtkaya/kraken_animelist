@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/features/anime_detail/presentation/anime_detail_page.dart';
 import 'package:kraken_animelist/features/anime_list/domain/models/kraken_anime.dart';

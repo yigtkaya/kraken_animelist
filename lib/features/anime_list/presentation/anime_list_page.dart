@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kraken_animelist/features/anime_list/bloc/app_bloc.dart';
+import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_bloc.dart';
+import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_event.dart';
+import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_state.dart';
 import 'package:kraken_animelist/features/anime_list/presentation/anime_list_item.dart';
 import 'package:kraken_animelist/src/shared/extensions/int_extension.dart';
 import 'package:kraken_animelist/src/shared/extensions/list_extension.dart';
@@ -24,7 +26,7 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
 
   void onScroll() {
     if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-      BlocProvider.of<AppBloc>(context).add(
+      BlocProvider.of<KrakenAnimeBloc>(context).add(
         const LoadNextPageEvent(),
       );
     }
@@ -47,18 +49,18 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          BlocProvider.of<AppBloc>(context).add(
+          BlocProvider.of<KrakenAnimeBloc>(context).add(
             const PullToRefreshEvent(),
           );
         },
         child: Padding(
           padding: EdgeInsets.all(8.0.w),
-          child: BlocBuilder<AppBloc, AppState>(
+          child: BlocBuilder<KrakenAnimeBloc, KrakenAnimeState>(
             builder: (context, state) {
-              if (state is AppStateLoading) {
+              if (state is KrakenAnimeStateLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is AppStateLoaded) {
+              if (state is KrakenAnimeStateLoaded) {
                 final animeList = state.krakenResponse.data;
                 if (animeList.isNotNullOrEmpty) {
                   return Column(

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_bloc.dart';
+import 'package:kraken_animelist/features/anime_detail/bloc/characters_event.dart';
+import 'package:kraken_animelist/features/anime_detail/bloc/characters_state.dart';
+import 'package:kraken_animelist/features/anime_detail/domain/repository/characters_repository_impl.dart';
 import 'package:kraken_animelist/features/anime_list/domain/models/kraken_anime.dart';
 import 'package:kraken_animelist/src/shared/extensions/build_context_extension.dart';
 import 'package:kraken_animelist/src/shared/extensions/int_extension.dart';
@@ -21,7 +24,9 @@ class AnimeDetailPage extends StatelessWidget {
       settings: const RouteSettings(name: routeName),
       builder: (_) {
         return BlocProvider<CharactersBloc>(
-          create: (context) => CharactersBloc()..add(OpenPageEvent(krakenAnime.malId!)),
+          create: (context) => CharactersBloc(
+            CharactersRepositoryImpl(),
+          )..add(OpenPageEvent(krakenAnime.malId!)),
           child: AnimeDetailPage(
             krakenAnime: krakenAnime,
           ),

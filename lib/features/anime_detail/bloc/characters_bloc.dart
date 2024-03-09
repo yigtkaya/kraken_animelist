@@ -1,14 +1,13 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kraken_animelist/features/anime_detail/domain/models/kraken_anime_detail_response.dart';
+import 'package:kraken_animelist/features/anime_detail/bloc/characters_event.dart';
+import 'package:kraken_animelist/features/anime_detail/bloc/characters_state.dart';
 import 'package:kraken_animelist/features/anime_detail/domain/repository/characters_repository_impl.dart';
 
-part 'characters_state.dart';
-part 'characters_event.dart';
-
 class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
-  final charactersRepositoryImpl = CharactersRepositoryImpl();
-  CharactersBloc() : super(const CharactersStateLoading()) {
+  final CharactersRepositoryImpl charactersRepositoryImpl;
+  CharactersBloc(
+    this.charactersRepositoryImpl,
+  ) : super(const CharactersStateLoading()) {
     on<OpenPageEvent>(onOpenPage);
   }
 

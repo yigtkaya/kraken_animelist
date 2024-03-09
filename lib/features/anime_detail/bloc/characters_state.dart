@@ -1,4 +1,5 @@
-part of 'characters_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:kraken_animelist/features/anime_detail/domain/models/kraken_anime_detail_response.dart';
 
 abstract class CharactersState extends Equatable {
   const CharactersState();
