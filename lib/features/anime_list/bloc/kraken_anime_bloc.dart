@@ -51,9 +51,6 @@ class KrakenAnimeBloc extends Bloc<KrakenAnimeEvent, KrakenAnimeState> {
     LoadNextPageEvent event,
     Emitter<KrakenAnimeState> emit,
   ) async {
-    if (state is! KrakenAnimeStateLoaded) {
-      return;
-    }
     final prevKrakenResponse = (state as KrakenAnimeStateLoaded).krakenResponse;
     if (!prevKrakenResponse.pagination!.hasNextPage!) {
       return;

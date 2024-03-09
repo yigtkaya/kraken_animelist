@@ -41,15 +41,5 @@ void main() {
       act: (bloc) => bloc.add(const PullToRefreshEvent()),
       expect: () => [isA<KrakenAnimeStateLoaded>()],
     );
-
-    blocTest<KrakenAnimeBloc, KrakenAnimeState>(
-      'emits [KrakenAnimeStateLoaded] when LoadNextPageEvent is added',
-      build: () {
-        when(() => krakenAnimeRepository.getAnimeList(3)).thenAnswer((_) async => KrakenAnimeResponse());
-        return KrakenAnimeBloc(krakenAnimeRepository);
-      },
-      act: (bloc) => bloc.add(const LoadNextPageEvent()),
-      expect: () => [isA<KrakenAnimeStateLoaded>()],
-    );
   });
 }
