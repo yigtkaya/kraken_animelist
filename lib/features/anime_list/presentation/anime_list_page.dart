@@ -34,10 +34,14 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF2C386B),
         title: Text(
-          'Kraken Anime List',
-          style: TextStyle(color: Colors.white, fontSize: 18.sp),
+          'Kraken Anime',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24.sp,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: RefreshIndicator(
@@ -47,7 +51,7 @@ class _AnimeListingPageState extends State<AnimeListingPage> {
           );
         },
         child: Padding(
-          padding: EdgeInsets.all(8.0.h),
+          padding: EdgeInsets.all(8.0.w),
           child: BlocBuilder<AppBloc, AppState>(
             builder: (context, state) {
               if (state is AppStateLoading) {

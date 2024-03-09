@@ -63,6 +63,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   animations: ^2.0.11
   connectivity_plus: ^5.0.2
+  expandable: ^5.0.1
   
 dev_dependencies:
   flutter_test:

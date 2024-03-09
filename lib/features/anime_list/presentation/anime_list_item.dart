@@ -22,14 +22,9 @@ class AnimeListItem extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(12.r),
-            bottomRight: Radius.circular(12.r),
-          ),
-          color: Colors.grey.shade300,
-        ),
+      child: Card(
+        shadowColor: Colors.orangeAccent,
+        elevation: 2,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -83,11 +78,24 @@ class AnimeListItem extends StatelessWidget {
                       ),
                     ),
                     12.rH,
-                    Text(
-                      "${krakenAnime.score.toString()} ⭐️",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          WidgetSpan(
+                            child: Icon(Icons.star_sharp, color: Colors.amber, size: 18.w),
+                          ),
+                          WidgetSpan(
+                            child: 4.rW,
+                          ),
+                          TextSpan(
+                            text: krakenAnime.score.toString(),
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

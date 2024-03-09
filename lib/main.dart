@@ -51,6 +51,8 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: AppConstants.appTitle,
           theme: ThemeData(
+            useMaterial3: true,
+            scaffoldBackgroundColor: const Color(0xffE5EBFE),
             primarySwatch: Colors.blue,
           ),
           navigatorObservers: [customRouteObserver],

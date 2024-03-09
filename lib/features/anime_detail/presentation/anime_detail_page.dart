@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,8 +32,10 @@ class AnimeDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final genres = krakenAnime.genres?.map((e) => e.name).toList().join(",") ?? [];
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xffE5EBFE),
         title: Text(
           krakenAnime.title!,
           style: TextStyle(
@@ -92,7 +95,7 @@ class AnimeDetailPage extends StatelessWidget {
                       krakenAnime.title ?? "",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -108,34 +111,117 @@ class AnimeDetailPage extends StatelessWidget {
                 ],
               ),
               12.rH,
-              Divider(
-                color: Colors.grey.shade200,
-                thickness: 2,
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
               ),
               12.rH,
-              Text(
-                "Information",
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
+              ExpandablePanel(
+                controller: ExpandableController(
+                  initialExpanded: true,
+                ),
+                header: Text(
+                  "Information",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                collapsed: const SizedBox.shrink(),
+                expanded: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Type: ",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "${krakenAnime.type}",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Episodes: ",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "${krakenAnime.episodes}",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Genres: ",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "$genres",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Ranked: ",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "#${krakenAnime.rank}",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                "Type: ${krakenAnime.type ?? ""}",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                ),
-              ),
-              Text(
-                "Episodes: ${krakenAnime.episodes ?? ""}",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                ),
-              ),
-              12.rH,
-              Divider(
-                color: Colors.grey.shade200,
-                thickness: 2,
+              6.rH,
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
               ),
               12.rH,
               Text(
@@ -153,15 +239,15 @@ class AnimeDetailPage extends StatelessWidget {
                 ),
               ),
               12.rH,
-              Divider(
-                color: Colors.grey.shade200,
-                thickness: 2,
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
               ),
               12.rH,
               Text(
                 "Characters",
                 style: TextStyle(
-                  fontSize: 20.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -233,63 +319,6 @@ class AnimeDetailPage extends StatelessWidget {
                         );
                       }),
                     );
-                    // return ListView.separated(
-                    //   itemCount: state.characters.data!.length,
-                    //   scrollDirection: Axis.vertical,
-                    //   shrinkWrap: true,
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    //   separatorBuilder: (context, index) => 12.rH,
-                    //   itemBuilder: ((context, index) {
-                    //     return Row(
-                    //       children: [
-                    //         SizedBox(
-                    //           height: 100.r,
-                    //           width: 100.r,
-                    //           child: CachedNetworkImage(
-                    //             imageUrl: state.characters.data![index].character!.images!.jpg!.imageUrl ?? "",
-                    //             imageBuilder: (_, provider) {
-                    //               return Container(
-                    //                 decoration: BoxDecoration(
-                    //                   borderRadius: BorderRadius.circular(12.r),
-                    //                   image: DecorationImage(
-                    //                     image: provider,
-                    //                     fit: BoxFit.fill,
-                    //                   ),
-                    //                 ),
-                    //               );
-                    //             },
-                    //             placeholder: (context, url) => SizedBox(
-                    //               height: 100.r,
-                    //               width: 100.r,
-                    //               child: Shimmer.fromColors(
-                    //                 baseColor: Colors.grey[300]!,
-                    //                 highlightColor: Colors.grey[100]!,
-                    //                 child: Container(
-                    //                   width: double.infinity,
-                    //                   decoration: BoxDecoration(
-                    //                     color: Colors.grey[300],
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //             errorWidget: (context, url, error) => const Text('error'),
-                    //           ),
-                    //         ),
-                    //         12.rW,
-                    //         Flexible(
-                    //           child: Text(
-                    //             state.characters.data![index].character!.name ?? "",
-                    //             overflow: TextOverflow.ellipsis,
-                    //             style: TextStyle(
-                    //               fontSize: 16.sp,
-                    //               fontWeight: FontWeight.bold,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     );
-                    //   }),
-                    // );
                   }
 
                   return const Center(
