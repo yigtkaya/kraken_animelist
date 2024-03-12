@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/dependecy_injection/di.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_bloc.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_event.dart';
-import 'package:kraken_animelist/features/anime_list/domain/repository/anime_list_repository_impl.dart';
+import 'package:kraken_animelist/features/anime_list/data/repository/anime_list_repository_impl.dart';
 import 'package:kraken_animelist/features/anime_list/presentation/anime_list_page.dart';
 import 'package:kraken_animelist/src/shared/constants/app_design_constant.dart';
 import 'package:kraken_animelist/src/shared/observers/custom_route_observer.dart';
@@ -16,7 +16,6 @@ Future<void> main() async {
   await runZonedGuarded(
     () async {
       await setupDI();
-      FirebaseCrashlytics.instance.crash();
       runApp(
         App(
           customRouteObserver: CustomRouteObserver(),

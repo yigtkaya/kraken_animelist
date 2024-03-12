@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_event.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_state.dart';
-import 'package:kraken_animelist/features/anime_list/domain/repository/anime_list_repository_impl.dart';
+import 'package:kraken_animelist/features/anime_list/data/repository/anime_list_repository_impl.dart';
 
 class KrakenAnimeBloc extends Bloc<KrakenAnimeEvent, KrakenAnimeState> {
   final KrakenAnimeRepositoryImpl krakenAnimeRepositoryImpl;

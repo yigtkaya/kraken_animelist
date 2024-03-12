@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_event.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_state.dart';
-import 'package:kraken_animelist/features/anime_detail/domain/repository/characters_repository_impl.dart';
+import 'package:kraken_animelist/features/anime_detail/data/repository/characters_repository_impl.dart';
 
 class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   final CharactersRepositoryImpl charactersRepositoryImpl;

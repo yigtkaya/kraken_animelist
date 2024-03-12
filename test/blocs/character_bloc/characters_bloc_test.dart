@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_bloc.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_event.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_state.dart';
-import 'package:kraken_animelist/features/anime_detail/domain/repository/characters_repository_impl.dart';
+import 'package:kraken_animelist/features/data/domain/repository/characters_repository_impl.dart';
 import 'package:kraken_animelist/features/anime_detail/domain/models/kraken_anime_detail_response.dart';
 import 'package:mocktail/mocktail.dart';
 

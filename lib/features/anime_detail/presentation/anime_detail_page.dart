@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_bloc.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_event.dart';
 import 'package:kraken_animelist/features/anime_detail/bloc/characters_state.dart';
-import 'package:kraken_animelist/features/anime_detail/domain/repository/characters_repository_impl.dart';
+import 'package:kraken_animelist/features/anime_detail/data/repository/characters_repository_impl.dart';
 import 'package:kraken_animelist/features/anime_list/domain/models/kraken_anime.dart';
 import 'package:kraken_animelist/src/shared/extensions/build_context_extension.dart';
 import 'package:kraken_animelist/src/shared/extensions/int_extension.dart';

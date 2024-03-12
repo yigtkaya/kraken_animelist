@@ -178,7 +178,7 @@ packages:
     source: hosted
     version: "2.0.3"
   chopper:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: chopper
       sha256: "8595c4cffe04a348e9fd7fdadb6b53f810915fed52343a943a344b5aa22516d4"

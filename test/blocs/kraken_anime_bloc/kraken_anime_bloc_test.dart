@@ -4,7 +4,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_bloc.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_event.dart';
 import 'package:kraken_animelist/features/anime_list/bloc/kraken_anime_state.dart';
-import 'package:kraken_animelist/features/anime_list/domain/repository/anime_list_repository_impl.dart';
+import 'package:kraken_animelist/features/anime_list/data/repository/anime_list_repository_impl.dart';
 import 'package:kraken_animelist/features/anime_list/domain/models/kraken_anime_response.dart';
 
 class MockKrakenAnimeRepository extends Mock implements KrakenAnimeRepositoryImpl {}

@@ -39,9 +39,6 @@ dependencies:
   bloc_test: ^9.1.6
   mocktail: ^1.0.3
   
-  # Network
-  chopper: ^7.1.1+1
-  
   # DEPENDENCY INJECTION
   get_it: ^7.6.7
 
