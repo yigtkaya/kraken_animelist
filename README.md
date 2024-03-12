@@ -1,16 +1,39 @@
 # kraken_animelist
 
-A new Flutter project.
+This is a Flutter project created for the MikroGroup Task for the interview process.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get started with this project, follow the steps below:
 
-A few resources to get you started if this is your first Flutter project:
+### Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Make sure you have Flutter installed on your machine. You can download Flutter from the official website: [Flutter](https://flutter.dev)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Installation
+
+1. Clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/your-username/kraken_animelist.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd kraken_animelist
+    ```
+
+3. Install the dependencies:
+
+    ```bash
+    flutter pub get
+    ```
+
+### Usage
+
+To run the Flutter application, use the following command: 
+
+    ```bash
+    flutter run
+    ```
