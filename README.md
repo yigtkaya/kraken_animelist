@@ -27,13 +27,19 @@ Make sure you have Flutter installed on your machine. You can download Flutter f
 3. Install the dependencies:
 
     ```bash
-    flutter pub get
+    make get
     ```
 
 ### Usage
 
-To run the Flutter application, use the following command: 
+4. To run the Flutter application, use the following command: 
 
     ```bash
     flutter run
+    ```
+
+5. Run test with: 
+
+    ```bash
+    make run_unit
     ```
